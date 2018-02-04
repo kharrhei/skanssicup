@@ -1,0 +1,350 @@
+﻿<!-- placeholder for generic implementation -->
+
+<script id="my-ModalView" type="text/template">
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close my-CancelButton" -removed-data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h1 id="myModallLabel" class="my-ModalView-title"></h1>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        
+                    </div>
+                </div>
+                <@= compiledTemplate @>
+            </div>
+            <div class="modal-footer">
+                <span class="my-ErrorInfo"></span>
+                <button class="btn btn-default btn btn-info my-Localized my-ApplyButton my-hidden" type="button" code="APPLY"></button>
+                <button class="btn btn-default btn btn-info my-Localized my-SaveButton my-hidden" type="button" code="SAVE"></button>
+                <button class="btn btn-default btn btn-info my-Localized my-CancelButton my-hidden" type="button" code="CANCEL"></button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <div class="my-ModalView-blocker my-hidden">
+        
+    </div>
+</script>
+<script id="my-PopoverView" type="text/template">
+    <div class="popover bottom out" >
+        <div class="arrow arrow-left"></div>
+        <h3 class="popover-title my-hidden"></h3>
+        <div class="popover-content"></div>
+    </div>
+</script>
+<script id="my-ModalProgressView" type="text/template">
+    <div class="row">
+        <div class="col-md-12 my-ModalProgressView-message"></div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 my-ModalProgressView-progress">&nbsp;</div>
+    </div>
+    <div class="row">
+    
+        <div class="col-12 col-md-12 my-ModalProgressView-progress">
+            <div class="progress progress-striped active">
+                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+                    <span class="sr-only my-ModalProgressView-srProgress"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script id="my-ModalMessageView" type="text/template">
+    <div class="row">
+        <div class="col-md-12 my-ModalMessage-message"></div>
+    </div>
+</script>
+<script id="my-UploadButton" type="text/template">
+    <form target="my-uploadFrame" enctype="multipart/form-data" action="<@= url @>" method="post">
+        <div class="my-UploadButtonWrapper"><button class="btn btn-default <@= extraClassNames @> my-Localized" code="<@= code @>"></button><input name="file" type="file" class="my-UploadFileInput" /></div>
+    </form>
+</script><!-- placeholder for my.view.attribute implementation -->
+
+<script id="my-TextEditAttributeView" type="text/template">
+    <div class="input-group">
+      <span class="input-group-addon my-AttributeStatus glyphicon glyphicon-ok"></span>
+      <input type="text" class="form-control my-Input">
+    </div>
+</script>
+
+<script id="my-TextAreaEditAttributeView" type="text/template">
+    <div class="input-group">
+      <span class="input-group-addon my-AttributeStatus glyphicon glyphicon-ok"></span>
+      <textarea class="form-control my-Input"></textarea>
+    </div>
+</script>
+
+<script id="my-BreadcrumbsAttributeView" type="text/template">
+    
+</script>
+
+<script id="my-EnumerationEditAttributeView" type="text/template">
+    <div class="input-group">
+      <span class="input-group-addon my-AttributeStatus glyphicon glyphicon-ok"></span>
+      <select class="form-control my-Input"/>
+    </div>
+</script>
+
+<script id="my-PasswordEditAttributeView" type="text/template">
+    <div class="input-group">
+      <span class="input-group-addon my-AttributeStatus glyphicon glyphicon-ok"></span>
+      <input type="password" class="form-control my-Input">
+    </div>
+</script>
+<script id="my-BooleanEditAttributeView" type="text/template">
+    <div class="input-group">
+      <span class="input-group-addon my-AttributeStatus glyphicon glyphicon-ok"></span>
+      <span class="input-group-btn" style="width: 100%">
+        <button style="float: left;" class="btn btn-default" type="button"><input type="checkbox" class="checkbox  my-Input"></button>
+      </span>
+      <!--
+      <button class="btn" click="void(0);"><input class="checkbox my-Input" type="checkbox"/></button>
+      -->
+    </div>
+</script>
+<script id="my-TextAttributeView" type="text/template">
+</script>
+<script id="my-DateAttributeView" type="text/template">
+</script>
+<script id="my-ImageAttributeView" type="text/template">
+    <img class="img-responsive" src="" />
+    
+</script>
+<script id="my-ImageEditAttributeView" type="text/template">
+    <!--<div class="fileupload fileupload-new" data-provides="fileupload">
+        <div class="fileupload-new thumbnail" style="width: 80px; height: 50px; background-color: light-gray; text-valign: middle;">Preview</div>
+        <div class="fileupload-preview fileupload-exists thumbnail" style="width: 50px; height: 50px;"></div>
+        <span class="btn btn-default btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input name="file" type="file" /></span>
+            <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+        </div>
+    -->
+        <img class="img-responsive" src="" />
+    <div class="my-UploadButtonContainer">
+        <form target="my-uploadFrame" enctype="multipart/form-data" action="<@= this.uploadPath @>" method="post">
+            <div class="my-UploadButtonWrapper"><button class="btn btn-default btn-inverse  my-Localized <@= this.buttonExtraClassNames @>" code="<@= this.buttonCode @>"></button><input name="file" type="file" class="my-UploadFileInput" /></div>
+        </form>
+    </div>
+</script>
+<script id="my-EnumerationAttributeView" type="text/template">
+</script>
+<script id="my-BooleanAttributeView" type="text/template">
+</script>
+<script id="demo-AboutView" type="text/template">
+    <h1>About my.js</h1>
+</script>
+
+<script id="demo-MainView" type="text/template">
+    <h1>myweb.fi - home of <a href="#./About/">my.js</a></h1>
+</script>
+
+<!-- placeholder for templates -->
+<script id="skanssicup-OnlineView" type="text/template">
+    <div class="prev"></div>
+    <div class="next"></div>
+</script>
+<script id="skanssicup-ResultsCompetitionView" type="text/template">
+    <iframe class="skanssicup-ResultsView-iframe" src="https://docs.google.com/document/d/e/2PACX-1vS1AKZXD06j-ms1DySPvLVNGp0klfmQnbwXFzQSVQKTorjtjHvFS9-X2tVzRP9J4-IrnzmA7i6wtEsi/pub?embedded=true"></iframe>
+</script>
+<script id="skanssicup-ResultsChallengeView" type="text/template">
+    <iframe class="skanssicup-ResultsView-iframe" src="https://docs.google.com/document/d/e/2PACX-1vT7UMgmxxebm5IrjX90aAU5JsYYuliaLien8Q-LTZAxdG1XNkcECducFTi7ZxOHyIFdARFtK6lFebpc/pub?embedded=true"></iframe>
+</script>
+<script id="skanssicup-MainView" type="text/template">
+    
+    <div class="jumbotron">
+      <div class="container">
+        <div class="row">
+            <div class="col-sm-12" style="text-align: center;">
+                <h1 class="my-Localized" code="MENU_TITLE"></h1>
+                <p class="my-Localized" code="MAIN_WELCOME_TEXT"></p>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12" style="text-align: center;">
+            <a class="btn btn-default btn-lg my-Localized" code="MENU_ABOUT" href="#./About/"></a>
+            <a class="btn btn-default btn-lg my-Localized" code="MENU_RESULTS_COMPETITION" href="#./ResultsCompetition/"></a>
+              <a class="btn btn-default btn-lg my-Localized" code="MENU_RESULTS_CHALLENGE" href="#./ResultsChallenge/"></a>
+              <a class="btn btn-default btn-lg my-Localized" code="MENU_SPONSORS" href="#./Sponsors/"></a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12" style="text-align: center;">
+              Skanssi Cup järjestetään F8-pojille ja F9-tytöille <@= skanssicup.DAY_OF_WEEK @>na  <@= skanssicup.DATE @> klo  <@= skanssicup.TIME @> alkaen
+              Turussa, <a href="<@= skanssicup.MAP_LINK @>" target="_new">Poropuiston tekonurmikentällä</a>
+              <@= skanssicup.ADDRESS @>.
+          </div>
+        </div>
+          <div class="row">
+              <div class="col-md-12" style="text-align: center;">
+              </div>
+          </div>
+        <div class="row">
+          <div class="col-md-12" style="text-align: center;">
+          </div>
+        </div>
+          <div class="row">
+              <div class="col-md-12" style="text-align: center;">
+                  Turnauksessa pelataan haastesarja (klo 9-14.00) ja kilpasarja (klo 14.30-19.30). Jokainen joukkue pelaa 4-5 peliä, joiden peliaika on 25 min/peli.
+                  <a href="#./About/">Lisää tietoja turnauksesta</a>
+              </div>
+          </div>
+        <div class="row">
+          <div class="col-md-12" style="text-align: center;">
+          </div>
+        </div>
+
+
+        </div>
+    </div>
+
+    <div class="container skanssicup-MainView">
+      <div class="row">
+
+        <div class="col-md-4">
+            <!--<a target="_new" href="http://www.skanssi.fi"><img class="img-responsive" src="img/skanssi.png" /></a>-->
+        </div>
+        <div class="col-md-4">
+          <img class="img-responsive" src="img/skanssicup.png" />
+        </div>
+        <div class="col-md-4">
+            <!--
+                <a href="http://www.tpsjuniorijalkapallo.fi/"><img class="img-responsive" src="img/tps.png" /></a>
+            -->
+        </div>
+      </div>
+    </div>
+</script>
+
+<script id="skanssicup-MenuView" type="text/template">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+            <img class="skanssicup-MenuView-logo" src="img/logo.png" width="18" height="17" border="0">
+            <a class="navbar-brand my-Localized" href="#" code="MENU_TITLE">Skanssi Cup 2018</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#./Main/"           class="my-Localized my-MenuItem my-MenuItem-Main"          code="MENU_MAIN">Pääsivu</a></li>
+            <li><a href="#./About/"          class="my-Localized my-MenuItem my-MenuItem-About"         code="MENU_ABOUT">Tietoja</a></li>
+              <li>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="my-Localized" code="MENU_RESULTS"></span><b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                  <li><a href="#./ResultsCompetition/"  class="my-Localized my-MenuItem my-MenuItem-ResultsCompetition"     code="MENU_RESULTS_COMPETITION"></a></li>
+                  <li><a href="#./ResultsChallenge/"      class="my-Localized my-MenuItem my-MenuItem-ResultsChallenge"         code="MENU_RESULTS_CHALLENGE"></a></li>
+              </ul>
+              </li>
+            <li><a href="#./Sponsors/"   class="my-Localized my-MenuItem my-MenuItem-Sponsors"  code="MENU_SPONSORS">Yhteistyökumppanit</a></li>
+            <li><a href="#./Tweets/" class="my-Localized my-MenuItem my-MenuItem-Tweets"><img src="img/tweets_orange.png" width="18" height="17" border="0"></a></li>
+              <li><a href="https://www.facebook.com/Skanssi-Cup-1780263032278170/" class="my-Localized my-MenuItem my-MenuItem-Facebook"><img src="img/fb.png" width="18" height="18" border="0"></a></li>
+          </ul>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+
+</script>
+<script id="skanssicup-SponsorsView" type="text/template">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1 class="my-Localized" code="MENU_SPONSORS"></h1>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <a target="_new" href="http://www.skanssi.fi"><img class="img-responsive" src="img/skanssi.png" /></a>
+            </div>
+            <div class="col-md-6">
+                <a href="http://www.tpsjuniorijalkapallo.fi/"><img class="img-responsive" src="img/tps.png" /></a>
+            </div>
+        </div>
+    </div>
+</script>
+
+
+<script id="skanssicup-AboutView" type="text/template">
+    <div class="container">
+      <!-- Example row of columns -->
+      <h1 class="my-Localized" code="MENU_ABOUT"></h1>
+      <div class="row">
+        <div class="col-lg-12">
+            <p><b>Järjestäjä:</b> <a href="https://www.facebook.com/tpsP05/">TPS P05</a></p>
+			<p><b>Aika:</b> <@= skanssicup.DATE @> (<@= skanssicup.DAY_OF_WEEK @>) klo <@= skanssicup.TIME @> alkaen</p>
+            <p><b>Sarjat</b></p>
+            <p>Turnauksessa on kaksi sarjaa:  <ul><li><a href="#./ResultsChallenge/">F8 Haastesarja</a> (9:00 - 14:00) </li>
+            <li><a href="#./ResultsChallenge/">F8 Kilpasarja</a> (14:30 - 19:30)</li></ul></p>
+            <p>
+                Molemmissa sarjoissa kaksi lohkoa, 4 joukkuetta/lohko
+            </p>
+            <p><b>Pelien määrä</b></p>
+            <p>Jokaiselle joukkueelle tulee 4-5 peliä. Yksi peli on 1 x 25 minuuttia.</p>
+            <p><b>Pelipaikat</b></p>
+			<p>Pelit pelataan <a href="<@= skanssicup.MAP_LINK@>" target="_new">Poropuiston jalkapallokentällä</a></p>
+			<p>Osoite on <@= skanssicup.ADDRESS @>. Kaikki pelit pelataan tekonurmella.</p>
+
+			<p><b>Säännöt</b></p>
+			<p>Turnauksessa noudatetaan <a href="https://www.palloliitto.fi/sites/default/files/kaikki_pelaa_saannot_2018_web.pdf" target="_new">Kaikki Pelaa –sääntöjä(Säännöt 2018)</a>. Jos muuta ei ole erikseen mainittu, noudatetaan Suomen Palloliiton (SPL) sääntöjä.</p>
+
+
+			<p><b>Palkinnot</b></p>
+			<p>Jokainen osallistuja palkitaan mitalilla (10 pelaajaa/joukkue), lisäksi jokaisesta joukkueesta palkitaan tsempparipelaaja.</p>
+
+			<p><b>Palvelut</b></p> 
+			<p>Turnausalueella on runsas buffetti, jossa on tarjolla mm. kahvia, virvokkeita, leivonnaisia, hot dogeja ja vohveleita. Turnauksessa on myös arpajaiset ja pallotutka.</p>
+            <!--
+			<p><b>Pukukoppi</b></p> 
+			<p>Käytössä on pukukoppeja (4), joten kaikille ei ole omaa koppia. Suihkut (8) ja vessat (4) ovat pukukoppien yhteydessä.</p>
+            -->
+
+			<p><b>Ilmoittautuminen</b></p> 
+			<p>Ilmoittautuminen tapahtuu sähköpostitse <a href="mailto:<@= skanssicup.MAIL@>"><ins class="my-Localized" code="MAIL_ADDRESS"></ins></a>
+            <p>
+            Turnaus täytetään ilmoittautumisjärjestyksessä. Maksuohjeet toimitetaan sähköpostilla ilmoittautumisen jälkeen. Osallistuminen vahvistuu, kun ilmoittautuminen ja turnausmaksu on suoritettu. Turnausmaksua ei palauteta, jos joukkue peruu tulonsa turnaukseen 31.3.2018 jälkeen.
+            <p>
+                Osallistumismaksu 130 eur/joukkue, mikäli ilmoittautuminen on ennen 15.3.2018, tämän jälkeen 150 eur/joukkue.
+            </p>
+            <p>
+                Etukäteen mahdollista tilata eväspussi 6 eur/pss (sis. mehu, sämpylä, hedelmä, välipalakeksi).
+            </p>
+
+</p>
+
+			<p><b>Lisätiedot:</b></p> 
+			<p>Pia Lehtonen<br />
+			<a href="mailto:<@= skanssicup.MAIL @>"><ins class="my-Localized" code="MAIL_ADDRESS"></ins></a></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+            <h3 class="my-Localized" code="HEADING_ABOUT_MAP"></h3>
+            <br />
+            <a class="btn btn-default btn-info skanssicup-AboutView-GoogleMapLink my-Localized" target="_new" href="//maps.google.com/" code="CONTENT_ABOUT_MAPLINK"></a>
+            <br />
+            <br />
+            <div  class="skanssicup-AboutView-GoogleMap"></div>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-lg-12">
+            <!--
+            <h3 class="my-Localized" code="HEADING_ABOUT_SPONSORS"></h3>
+            <p  class="my-Localized" code="CONTENT_ABOUT_SPONSORS"></p>
+            -->
+        </div>
+      </div>
+    </div>
+</script>
+
+<script id="skanssicup-TweetsView" type="text/template">
+            
+</script>
